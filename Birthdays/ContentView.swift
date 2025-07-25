@@ -18,13 +18,17 @@ struct ContentView: View {
     var body: some View {
         
         NavigationStack{
-        List (friends) { friend in
-            HStack{
-                Text (friend.name)
-                Spacer()
-                Text (friend.birthday, format: .dateTime.month(.wide).day().year())
+            List {
+                ForEach(friends) {friend in
+                HStack{
+                    Text (friend.name)
+                    Spacer()
+                    Text (friend.birthday, format: .dateTime.month(.wide).day().year())
+                }
             }
+            .onDelete(perform: deleteFriend)
         }
+            
         .navigationTitle("Birthdays")
         .safeAreaInset(edge: .bottom) {
             VStack(alignment: .center, spacing: 20){
